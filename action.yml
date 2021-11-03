@@ -25,7 +25,7 @@ runs:
       shell: bash
       run: |
         cat body.html;
-        sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h.>/<b>/g' -e 's/<\/h.>/<\/b>/g' body.html;
+        sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h. /<b /g' -e 's/<\/h.>/<\/b>/g' body.html;
         echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h.>/<b>/g' -e 's/<\/h.>/<\/b>/g' body.html)";
     - name: Send message
       uses: appleboy/telegram-action@master
