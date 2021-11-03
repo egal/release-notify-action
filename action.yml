@@ -7,6 +7,9 @@ inputs:
   repository_url:
     description: 'Repository URL'
     required: true
+  release_json:
+    description: 'Github Event Release as JSON'
+    required: true
   telegram_channel_id:
     description: 'Telegram channel ID'
     required: true
