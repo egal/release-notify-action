@@ -23,12 +23,7 @@ runs:
         args: --output=body.html body.md
     - id: body-convertor
       shell: bash
-      run: |
-        cat body.html;
-        echo '------------------------------------';
-        sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html;
-        exit 1;
-        echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h.>/<b>/g' -e 's/<\/h.>/<\/b>/g' body.html)";
+      run: echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h.>/<b>/g' -e 's/<\/h.>/<\/b>/g' body.html)";
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
