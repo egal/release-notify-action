@@ -13,6 +13,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - uses: docker://pandoc/latex:2.9
+      with:
+        args: --output=body.html ${{ steps.files_list.outputs.files }}
+    - id: body-convertor
+      run: echo "::set-output name=html::$(cat body.html)"
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
@@ -20,7 +25,10 @@ runs:
         token: ${{ inputs.telegram_token }}
         message: |
           New release: ${{ fromJson(inputs.release_json).name }}
+
           ${{ fromJson(inputs.release_json).body }}
+
+          ${{ steps.body-convertor.outputs.html }}
 
 #          *bold \*text*
 #          _italic \*text_
