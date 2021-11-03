@@ -24,6 +24,8 @@ runs:
     - id: body-convertor
       shell: bash
       run: |
+        echo "${{ fromJson(inputs.release_json).body }}";
+        echo "------------------------------------";
         sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html;
         echo "------------------------------------";
         echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
