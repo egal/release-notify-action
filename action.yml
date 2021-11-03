@@ -24,26 +24,17 @@ runs:
     - id: body-convertor
       shell: bash
       run: |
-        echo "${{ fromJson(inputs.release_json).body }}";
-        echo "------------------------------------";
-        cat body.html;
-        echo "------------------------------------";
-        echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<[(ul\/ul)^>]*>//g' -e 's/<li./- /g' -e 's/<\/li>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
-        echo "------------------------------------";
-        echo ${{ steps.body-convertor.outputs.html }};
-    - id: message
-      shell: bash
-      run: |
-        echo "::set-output name=html::&#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>/n/n${{ steps.body-convertor.outputs.html }}";
-        echo "------------------------------------";
-        echo ${{ steps.message.outputs.html }};
+        $message = "$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<[(ul\/ul)^>]*>//g' -e 's/<li./- /g' -e 's/<\/li>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
+        echo "TELEGRAM_MESSAGE<<EOF" >> $GITHUB_ENV
+        echo "$message" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ inputs.telegram_channel_id }}
         token: ${{ inputs.telegram_token }}
         format: html
-        message: ${{ steps.message.outputs.html }}
+        message: |
+          &#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>
 
-
-
+          ${{ env.TELEGRAM_MESSAGE }}
