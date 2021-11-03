@@ -21,9 +21,13 @@ runs:
         format: markdown
         message: |
           Name:
-          ${{ inputs.release_json.name }}
+          ${{ fromJson(inputs.release_json).name }}
           Body:
-          ${{ inputs.release_json.body }}
+          ${{ fromJson(inputs.release_json).body }}
+          release_json:
+          ```
+          ${{ fromJson(inputs.release_json) }}
+          ```
 
 #          *bold \*text*
 #          _italic \*text_
