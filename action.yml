@@ -44,7 +44,7 @@ runs:
         to: ${{ inputs.telegram_channel_id }}
         token: ${{ inputs.telegram_token }}
         format: html
-        message: ${{ steps.body-convertor.message.html }}
+        message: ${{ steps.message.outputs.html }}
 
 
 
