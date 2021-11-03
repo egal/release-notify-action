@@ -24,7 +24,7 @@ runs:
     - id: body-convertor
       shell: bash
       run: |
-        $message = "$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<[(ul\/ul)^>]*>//g' -e 's/<li./- /g' -e 's/<\/li>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
+        message="$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<[(ul\/ul)^>]*>//g' -e 's/<li./- /g' -e 's/<\/li>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
         echo "TELEGRAM_MESSAGE<<EOF" >> $GITHUB_ENV
         echo "$message" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
