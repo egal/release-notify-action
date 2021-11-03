@@ -17,6 +17,7 @@ runs:
       with:
         args: --output=body.html ${{ steps.files_list.outputs.files }}
     - id: body-convertor
+      shell: bash
       run: echo "::set-output name=html::$(cat body.html)"
     - name: Send message
       uses: appleboy/telegram-action@master
