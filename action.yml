@@ -1,12 +1,12 @@
 name: 'Egal Release Notify'
 description: 'Sending a Telegram message about release.'
 inputs:
-#  repository_name:
-#    description: 'Repository name'
-#    required: true
-#  repository_url:
-#    description: 'Repository URL'
-#    required: true
+  repository_name:
+    description: 'Repository name'
+    required: true
+  repository_url:
+    description: 'Repository URL'
+    required: true
   telegram_channel_id:
     description: 'Telegram channel ID'
     required: true
@@ -31,6 +31,6 @@ runs:
         token: ${{ inputs.telegram_token }}
         format: html
         message: |
-          &#9898 New release: ${GITHUB_REPOSITORY}/${{ fromJson(inputs.release_json).name }}
+          &#9898 New release: ${{ inputs.repository_name }}/${{ fromJson(inputs.release_json).name }}
 
           ${{ steps.body-convertor.outputs.html }}
