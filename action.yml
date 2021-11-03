@@ -31,7 +31,6 @@ runs:
         echo "::set-output name=html::$(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)";
         echo "------------------------------------";
         echo ${{ steps.body-convertor.outputs.html }};
-        exit 1;
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
