@@ -13,9 +13,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - shell: bash
+      run: echo ${{ fromJson(inputs.release_json).body }} > body.md
     - uses: docker://pandoc/latex:2.9
       with:
-        args: --output=body.html ${{ fromJson(inputs.release_json).body }}
+        args: --output=body.html body.md
     - id: body-convertor
       shell: bash
       run: echo "::set-output name=html::$(cat body.html)"
