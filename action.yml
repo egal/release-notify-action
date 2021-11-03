@@ -34,10 +34,7 @@ runs:
     - id: message
       shell: bash
       run: |
-        message="";
-        message="${message}&#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>";
-        message="${message}/n/n${{ steps.body-convertor.outputs.html }}";
-        echo "::set-output name=html::${message}";
+        echo "::set-output name=html::&#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>/n/n${{ steps.body-convertor.outputs.html }}";
         echo "------------------------------------";
         echo ${{ steps.message.outputs.html }};
     - name: Send message
