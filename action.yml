@@ -16,26 +16,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - shell: bash
-      run: echo "${{ fromJson(inputs.release_json).body }}" > body.md
-    - uses: docker://pandoc/latex:2.9
-      with:
-        args: --output=body.html body.md
-    - id: body-convertor
-      shell: bash
-      run: |
-        message=$(cat << EOF
-        &#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>
-
-        $(sed -e 's/<[(p\/p)^>]*>//g' -e 's/<[(ul\/ul)^>]*>//g' -e 's/<li./- /g' -e 's/<\/li>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html)
-        EOF)
-        echo "TELEGRAM_MESSAGE<<EOF" >> $GITHUB_ENV
-        echo "$message" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ inputs.telegram_channel_id }}
         token: ${{ inputs.telegram_token }}
         format: html
-        message: ${{ env.TELEGRAM_MESSAGE }}
+        message: |
+          &#9898 New release:
+          <b>${{ inputs.repository_name }}</b> - <b>${{ fromJson(inputs.release_json).name }}</b>
+
+          &#128466 <a href="${{ fromJson(inputs.release_json).html_url }}">Discription</a>.
