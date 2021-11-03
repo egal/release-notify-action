@@ -28,8 +28,6 @@ runs:
         token: ${{ inputs.telegram_token }}
         format: html
         message: |
-          &#9898 New release: ${{ fromJson(inputs.release_json).name }}
-
-          ${{ fromJson(inputs.release_json).body }}
+          &#9898 New release: $REPOSITORY_NAME/${{ fromJson(inputs.release_json).name }}
 
           ${{ steps.body-convertor.outputs.html }}
