@@ -38,7 +38,4 @@ runs:
         to: ${{ inputs.telegram_channel_id }}
         token: ${{ inputs.telegram_token }}
         format: html
-        message: |
-
-
-          ${{ env.TELEGRAM_MESSAGE }}
+        message: ${{ env.TELEGRAM_MESSAGE }}
