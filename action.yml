@@ -24,6 +24,7 @@ runs:
     - id: body-convertor
       shell: bash
       run: |
+        chmod 777 body.html;
         sed -e 's/<[(p\/p)^>]*>//g' -e 's/<h./<b/g' -e 's/<\/h.>/<\/b>/g' body.html > body.html;
         cat body.html;
         echo "::set-output name=html::$(cat body.html)";
