@@ -1,13 +1,20 @@
 name: 'Egal Release Notify'
 description: 'Sending a Telegram message about release.'
+inputs:
+  telegram_channel_id:
+    description: 'Telegram channel ID'
+    required: true
+  telegram_token:
+    description: 'Telegram Token'
+    required: true
 runs:
   using: 'composite'
   steps:
     - name: Send message
       uses: appleboy/telegram-action@master
       with:
-        to: ${{ secrets.TELEGRAM_CHANNEL_ID_FOR_RELEASE_NOTIFY }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
+        to: ${{ inputs.telegram_channel_id }}
+        token: ${{ inputs.telegram_token }}
         format: markdown
         message: |
           *bold \*text*
