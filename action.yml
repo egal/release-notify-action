@@ -24,6 +24,7 @@ runs:
         format: html
         message: |
           &#9898 <b>Release</b>:
-          &#128194 ${{ inputs.repository_name }}
-          &#128206 ${{ fromJson(inputs.release_json).name }}
-          &#128466 <a href="${{ fromJson(inputs.release_json).html_url }}">Discription</a>.
+
+          &#128194 <i>Product</i>: ${{ inputs.repository_name }}
+          &#128206 <i>Version</i>: ${{ fromJson(inputs.release_json).name }}
+          &#128466 <i>Discription</i>: <a href="${{ fromJson(inputs.release_json).html_url }}">link</a>
