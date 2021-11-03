@@ -4,9 +4,6 @@ inputs:
   repository_name:
     description: 'Repository name'
     required: true
-  repository_url:
-    description: 'Repository URL'
-    required: true
   release_json:
     description: 'Github Event Release as JSON'
     required: true
@@ -34,6 +31,6 @@ runs:
         token: ${{ inputs.telegram_token }}
         format: html
         message: |
-          &#9898 New release: ${{ fromJson(inputs.release_json).repo.name }}/${{ fromJson(inputs.release_json).name }}
+          &#9898 <b>${{ inputs.repository_name }}</b> new release: <a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a>
 
           ${{ steps.body-convertor.outputs.html }}
