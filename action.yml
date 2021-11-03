@@ -1,12 +1,12 @@
 name: 'Egal Release Notify'
 description: 'Sending a Telegram message about release.'
 inputs:
-  repository_name:
-    description: 'Repository name'
-    required: true
-  repository_url:
-    description: 'Repository URL'
-    required: true
+#  repository_name:
+#    description: 'Repository name'
+#    required: true
+#  repository_url:
+#    description: 'Repository URL'
+#    required: true
   telegram_channel_id:
     description: 'Telegram channel ID'
     required: true
