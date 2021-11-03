@@ -1,8 +1,8 @@
 name: 'Egal Release Notify'
 description: 'Sending a Telegram message about release.'
 inputs:
-  release_object:
-    description: 'Github Event Release Object'
+  release_json:
+    description: 'Github Event Release as JSON'
     required: true
   telegram_channel_id:
     description: 'Telegram channel ID'
@@ -21,9 +21,9 @@ runs:
         format: markdown
         message: |
           Name:
-          ${{ inputs.release_object.name }}
+          ${{ inputs.release_json.name }}
           Body:
-          ${{ inputs.release_object.body }}
+          ${{ inputs.release_json.body }}
 
 #          *bold \*text*
 #          _italic \*text_
