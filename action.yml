@@ -37,5 +37,11 @@ runs:
         format: html
         message: |
           &#9898 New release of <b>${{ inputs.repository_name }}</b>: <b><a href="${{ fromJson(inputs.release_json).html_url }}">${{ fromJson(inputs.release_json).name }}</a></b>
+          <ul>
+            <li>Чебурашка</li>
+            <li>Крокодил Гена</li>
+            <li>Шапокляк</li>
+            <li>Крыса Лариса</li>
+          </ul>
 
           ${{ steps.body-convertor.outputs.html }}
