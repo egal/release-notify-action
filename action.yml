@@ -27,4 +27,4 @@ runs:
 
           &#128194 <i>Product:</i> <b>${{ inputs.repository_name }}</b>
           &#128206 <i>Version:</i> <b>${{ fromJson(inputs.release_json).name }}</b>
-          &#128466 <i>Discription:</i> <b><a href="${{ fromJson(inputs.release_json).html_url }}">link</a></b>
+          &#128466 <i>Description:</i> <b><a href="${{ fromJson(inputs.release_json).html_url }}">link</a></b>
